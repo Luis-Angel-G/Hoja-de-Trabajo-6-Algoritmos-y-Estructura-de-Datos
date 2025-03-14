@@ -71,10 +71,10 @@ public class PokemonManager {
     }
     
     public void showPokemonsByAbility(String ability) {
-        System.out.println("Pokemons with ability " + ability + ":");
+        System.out.println("Pokemons con la habilidad " + ability + ":");
         pokemonMap.values().stream()
-                .filter(p -> p.getAbilities().equalsIgnoreCase(ability))
-                .forEach(System.out::println);
+                .filter(p -> Arrays.asList(p.getAbilities().split(", ")).contains(ability))
+                .forEach(p -> System.out.println(p.name + " - " + p.abilities));
     }
     
     public static void main(String[] args) throws IOException {
