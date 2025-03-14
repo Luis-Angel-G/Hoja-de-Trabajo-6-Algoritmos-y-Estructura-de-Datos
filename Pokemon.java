@@ -16,6 +16,10 @@ class Pokemon {
         this.legendary = legendary;
     }
 
+    public String getAbilities() {
+        return abilities;
+    }
+
     @Override
     public String toString() {
         return name + " - Tipo1: " + type1 + " - Tipo2: " + type2 + " - Clasificación: " + classification + " - Altura: " + height + "m - Peso: " + weight + "kg - Habilidades: " + abilities + " - Generación: " + generation + " - Legendario: " + (legendary ? "Sí" : "No");
