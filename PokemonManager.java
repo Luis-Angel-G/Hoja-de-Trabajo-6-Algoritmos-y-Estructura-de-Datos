@@ -15,15 +15,15 @@ public class PokemonManager {
             String line;
             br.readLine(); // Saltar encabezado
             while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data.length < 9) continue;
+                String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+                if (data.length < 10) continue;
                 String name = data[0].trim();
                 String type1 = data[2].trim();
                 String type2 = data[3].trim();
                 String classification = data[4].trim();
                 double height = Double.parseDouble(data[5].trim());
                 double weight = Double.parseDouble(data[6].trim());
-                String abilities = data[7].trim();
+                String abilities = data[7].trim().replaceAll("\"", "");
                 int generation = Integer.parseInt(data[8].trim());
                 boolean legendary = data[9].trim().equalsIgnoreCase("Yes");
 
