@@ -16,11 +16,18 @@ public class PokemonManager {
             br.readLine(); // Saltar encabezado
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length < 3) continue;
+                if (data.length < 9) continue;
                 String name = data[0].trim();
-                String type1 = data[1].trim();
-                String ability = data.length > 2 ? data[2] : "Unknown";
-                pokemonMap.put(name, new Pokemon(name, type1, ability));
+                String type1 = data[2].trim();
+                String type2 = data[3].trim();
+                String classification = data[4].trim();
+                double height = Double.parseDouble(data[5].trim());
+                double weight = Double.parseDouble(data[6].trim());
+                String abilities = data[7].trim();
+                int generation = Integer.parseInt(data[8].trim());
+                boolean legendary = data[9].trim().equalsIgnoreCase("Yes");
+
+                pokemonMap.put(name, new Pokemon(name, type1, type2, classification, height, weight, abilities, generation, legendary));
             }
         }
     }
@@ -55,7 +62,7 @@ public class PokemonManager {
     public void showPokemonsByAbility(String ability) {
         System.out.println("Pokemons with ability " + ability + ":");
         pokemonMap.values().stream()
-                .filter(p -> p.ability.equalsIgnoreCase(ability))
+                .filter(p -> p.getAbilities().equalsIgnoreCase(ability))
                 .forEach(System.out::println);
     }
     
