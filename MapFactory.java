@@ -1,7 +1,7 @@
 import java.util.*;
 
-class MapFactory {
-    public static Map<String, Pokemon> getMap(String type) {
+public class MapFactory {
+    public static <T extends Pokemon> Map<String, T> getMap(String type) {
         return switch (type.toLowerCase()) {
             case "hashmap" -> new HashMap<>();
             case "treemap" -> new TreeMap<>();
