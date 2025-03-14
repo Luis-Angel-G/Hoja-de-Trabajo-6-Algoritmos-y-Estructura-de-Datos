@@ -1,39 +1,30 @@
 import java.io.*;
 import java.util.*;
 
-public class PokemonManager {
-    private final Map<String, Pokemon> pokemonMap;
-    private final List<Pokemon> userCollection;
+public class PokemonManager<T extends Pokemon> {
+    private final Map<String, T> pokemonMap;
+    private final List<T> userCollection;
 
     public PokemonManager(String mapType) {
         this.pokemonMap = MapFactory.getMap(mapType);
         this.userCollection = new ArrayList<>();
     }
 
-    public void loadPokemons(String filePath) throws IOException {
+    public void loadPokemons(String filePath, PokemonFactory<T> factory) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             br.readLine(); // Saltar encabezado
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 if (data.length < 10) continue;
-                String name = data[0].trim();
-                String type1 = data[2].trim();
-                String type2 = data[3].trim();
-                String classification = data[4].trim();
-                double height = Double.parseDouble(data[5].trim());
-                double weight = Double.parseDouble(data[6].trim());
-                String abilities = data[7].trim().replaceAll("\"", "");
-                int generation = Integer.parseInt(data[8].trim());
-                boolean legendary = data[9].trim().equalsIgnoreCase("Yes");
-
-                pokemonMap.put(name, new Pokemon(name, type1, type2, classification, height, weight, abilities, generation, legendary));
+                T pokemon = factory.createPokemon(data);
+                pokemonMap.put(pokemon.name, pokemon);
             }
         }
     }
 
     public void addPokemonToCollection(String name) {
-        Pokemon p = pokemonMap.get(name);
+        T p = pokemonMap.get(name);
         if (p != null && !userCollection.contains(p)) {
             userCollection.add(p);
             System.out.println(name + " se ha agregado a tu colección.");
@@ -46,7 +37,7 @@ public class PokemonManager {
     }
 
     public void showPokemon(String name) {
-        Pokemon p = pokemonMap.get(name);
+        T p = pokemonMap.get(name);
         System.out.println(p != null ? p : "Pokemon no encontrado.");
     }
 
@@ -55,17 +46,17 @@ public class PokemonManager {
     }
 
     public void showUserPokemonsByType() {
-        List<Pokemon> sortedList = new ArrayList<>(userCollection);
+        List<T> sortedList = new ArrayList<>(userCollection);
         sortedList.sort(Comparator.comparing(p -> p.type1));
-        for (Pokemon p : sortedList) {
+        for (T p : sortedList) {
             System.out.println(p.name + " - " + p.type1);
         }
     }
 
     public void showPokemonsByType() {
-        List<Pokemon> sortedList = new ArrayList<>(pokemonMap.values());
+        List<T> sortedList = new ArrayList<>(pokemonMap.values());
         sortedList.sort(Comparator.comparing(p -> p.type1));
-        for (Pokemon p : sortedList) {
+        for (T p : sortedList) {
             System.out.println(p.name + " - " + p.type1);
         }
     }
@@ -82,8 +73,8 @@ public class PokemonManager {
             System.out.println("Ingrese el tipo de estructura a utilizar (hashmap, treemap, linkedhashmap):");
             String mapType = scanner.nextLine();
             
-            PokemonManager manager = new PokemonManager(mapType);
-            manager.loadPokemons("pokemon_data_pokeapi.csv");
+            PokemonManager<Pokemon> manager = new PokemonManager<>(mapType);
+            manager.loadPokemons("pokemon_data_pokeapi.csv", Pokemon::new);
             
             int choice;
             do {
