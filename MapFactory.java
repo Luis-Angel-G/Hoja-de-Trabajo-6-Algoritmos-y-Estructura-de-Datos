@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * La clase MapFactory proporciona un método para obtener diferentes implementaciones de Map.
  * Utiliza el patrón de diseño Factory para seleccionar la implementación de Map en tiempo de ejecución.
- * @Project : Hoja de Trabajo 6 - Algoritmos y Estructura de Datos 3
+ * @Project : Hoja de Trabajo 6 - Algoritmos y Estructura de Datos
  * @Author : Luis Angel Girón Arévalo
  * Creación : 13/03/2025
  * Última modificación : 13/03/2025
