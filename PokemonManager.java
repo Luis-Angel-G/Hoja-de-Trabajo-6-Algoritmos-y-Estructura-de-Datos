@@ -54,6 +54,14 @@ public class PokemonManager {
         userCollection.forEach(System.out::println);
     }
 
+    public void showUserPokemonsByType() {
+        List<Pokemon> sortedList = new ArrayList<>(userCollection);
+        sortedList.sort(Comparator.comparing(p -> p.type1));
+        for (Pokemon p : sortedList) {
+            System.out.println(p.name + " - " + p.type1);
+        }
+    }
+
     public void showPokemonsByType() {
         List<Pokemon> sortedList = new ArrayList<>(pokemonMap.values());
         sortedList.sort(Comparator.comparing(p -> p.type1));
@@ -79,7 +87,7 @@ public class PokemonManager {
             
             int choice;
             do {
-                System.out.println("\nMenú: \n1. Agregar Pokémon\n2. Mostrar Pokémon\n3. Mostrar todos los Pokémon de la colección\n4. Mostrar todos los Pokémon leídos por tipo\n5. Buscar por habilidad\n6. Salir");
+                System.out.println("\nMenú: \n1. Agregar Pokémon\n2. Mostrar Pokémon\n3. Mostrar todos los Pokémon de la colección\n4. Mostrar todos los Pokémon leídos por tipo\n5. Buscar por habilidad\n6. Mostrar Pokémon de la colección ordenados por tipo\n7. Salir");
                 System.out.print("Opción: ");
                 choice = scanner.nextInt();
                 scanner.nextLine();
@@ -102,8 +110,9 @@ public class PokemonManager {
                         String ability = scanner.nextLine();
                         manager.showPokemonsByAbility(ability);
                     }
+                    case 6 -> manager.showUserPokemonsByType();
                 }
-            } while (choice != 6);
+            } while (choice != 7);
         }
     }
 }
