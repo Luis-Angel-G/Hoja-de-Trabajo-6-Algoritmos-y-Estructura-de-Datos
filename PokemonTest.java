@@ -2,8 +2,21 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Clase de pruebas unitarias para la clase Pokemon.
+ * Proporciona métodos para verificar la correcta creación y representación en cadena de objetos Pokemon.
+ * 
+ * @Project : Hoja de Trabajo 6 - Algoritmos y Estructura de Datos
+ * @Author : Luis Angel Girón Arévalo
+ * Creación : 13/03/2025
+ * Última modificación : 13/03/2025
+ * @File Name: PokemonTest.java
+ */
 class PokemonTest {
 
+    /**
+     * Prueba la correcta creación de un objeto Pokemon a partir de un array de datos.
+     */
     @Test
     void testPokemonCreation() {
         String[] data = {"Bulbasaur", "1", "Grass", "Poison", "Seed Pokémon", "0.7", "6.9", "Overgrow, Chlorophyll", "1", "No"};
@@ -20,6 +33,9 @@ class PokemonTest {
         assertFalse(bulbasaur.legendary);
     }
 
+    /**
+     * Prueba la representación en cadena de un objeto Pokemon.
+     */
     @Test
     void testPokemonToString() {
         String[] data = {"Bulbasaur", "1", "Grass", "Poison", "Seed Pokémon", "0.7", "6.9", "Overgrow, Chlorophyll", "1", "No"};
