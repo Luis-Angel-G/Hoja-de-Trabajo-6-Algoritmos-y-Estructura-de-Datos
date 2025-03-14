@@ -36,9 +36,12 @@ public class PokemonManager {
         Pokemon p = pokemonMap.get(name);
         if (p != null && !userCollection.contains(p)) {
             userCollection.add(p);
-            System.out.println(name + " added to your collection.");
+            System.out.println(name + " se ha agregado a tu colección.");
+        }
+        else if(userCollection.contains(p)) {
+            System.out.println(name + " ya está en tu colección, no se puede agregar.");
         } else {
-            System.out.println(name + " is either already in your collection or does not exist.");
+            System.out.println("Pokemon no encontrado.");
         }
     }
 
