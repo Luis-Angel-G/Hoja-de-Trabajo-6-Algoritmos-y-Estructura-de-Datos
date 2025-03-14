@@ -47,7 +47,7 @@ public class PokemonManager {
 
     public void showPokemon(String name) {
         Pokemon p = pokemonMap.get(name);
-        System.out.println(p != null ? p : "Pokemon not found.");
+        System.out.println(p != null ? p : "Pokemon no encontrado.");
     }
 
     public void showUserCollection() {
