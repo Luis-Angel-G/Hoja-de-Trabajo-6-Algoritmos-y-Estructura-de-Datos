@@ -67,6 +67,15 @@ public class PokemonManager<T extends Pokemon> {
                 .filter(p -> Arrays.asList(p.getAbilities().split(", ")).contains(ability))
                 .forEach(p -> System.out.println(p.name + " - " + p.abilities));
     }
+
+    // Métodos públicos para acceder a pokemonMap y userCollection
+    public Map<String, T> getPokemonMap() {
+        return pokemonMap;
+    }
+
+    public List<T> getUserCollection() {
+        return userCollection;
+    }
     
     public static void main(String[] args) throws IOException {
         try (Scanner scanner = new Scanner(System.in)) {
